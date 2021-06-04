@@ -5,7 +5,6 @@
     "lib": ["es2015"],
     "outDir": "./dist",
     "rootDir": "./src",
-    "strict": true,
     "strictPropertyInitialization": false,
     "baseUrl": "./src",
     "paths": {
