@@ -4,6 +4,7 @@ import { CreateCategoryUseCase } from '../modules/cars/useCases/CreateCategory/C
 // import { CategoriesRepository } from '../modules/cars/repositories/CategoriesRepository'
 import { PostgresCategoriesRepository } from '../modules/cars/repositories/PostgresCategoriesRepository'
 import { createCategoryController } from '../modules/cars/useCases/CreateCategory'
+import { listCategoriesController } from '../modules/cars/useCases/ListCategories'
 
 const categoriesRoutes = Router()
 const categoriesRepository = new PostgresCategoriesRepository()
@@ -13,8 +14,7 @@ categoriesRoutes.post('/', (request, response) => {
 })
 
 categoriesRoutes.get('/', (request, response) => {
-  const all = categoriesRepository.list()
-  return response.status(200).json(all)
+  return listCategoriesController.handle(request, response)
 })
 
 export { categoriesRoutes }
