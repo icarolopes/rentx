@@ -8,7 +8,7 @@ interface IPayload {
   sub: string
 }
 
-export async function ensureauthenticated(
+export async function ensureAuthenticated(
   request: Request,
   response: Response,
   next: NextFunction
@@ -32,6 +32,10 @@ export async function ensureauthenticated(
 
     if (!user) {
       throw new AppError('User does not exists!', 401)
+    }
+
+    request.user = {
+      id: user_id
     }
 
     next()
