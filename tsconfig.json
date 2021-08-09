@@ -8,7 +8,7 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "strictPropertyInitialization": false,
-    "baseUrl": "./src",
+    "baseUrl": ".",
     // "paths": {
     //   "@modules/*": ["modules/*"],
     //   "@config/*": ["config/*"],
