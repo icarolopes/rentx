@@ -2,18 +2,18 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "lib": [
-      "es2015"
-    ],
+    "lib": ["es2015"],
     "outDir": "./dist",
     "rootDir": "./src",
     "strictPropertyInitialization": false,
-    "baseUrl": ".",
-    // "paths": {
-    //   "@modules/*": ["modules/*"],
-    //   "@config/*": ["config/*"],
-    //   "@shared/*": ["shared/*"]
-    // },
+    "baseUrl": "./src",
+    "paths": {
+      "@modules/*": ["modules/*"],
+      "@config/*": ["config/*"],
+      "@shared/*": ["shared/*"],
+      "@errors/*": ["errors/*"],
+      "@utils/*": ["utils/*"]
+    },
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
