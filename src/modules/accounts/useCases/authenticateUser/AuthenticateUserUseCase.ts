@@ -4,6 +4,7 @@ import { sign } from 'jsonwebtoken'
 
 import { AppError } from '@shared/errors/AppError'
 import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository'
+import { authConfig } from '@config/auth'
 
 interface IRequest {
   email: string
@@ -38,9 +39,12 @@ export class AuthenticateUserUseCase {
       throw new AppError('Email or password incorrect!')
     }
 
-    const token = sign({}, '01a1a1c10ccdc7a08224abc6a6aa3c89bfc0b5d2', {
+    const { privateKey, expiresIn } = authConfig.jwt
+
+    const token = sign({}, privateKey, {
       subject: user.id,
-      expiresIn: '1d'
+      algorithm: 'RS256',
+      expiresIn
     })
 
     return {

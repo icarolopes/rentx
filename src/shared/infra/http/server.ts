@@ -1,5 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express'
 import swaggerUI from 'swagger-ui-express'
+import * as dontenv from 'dotenv'
 
 import 'express-async-errors'
 
@@ -12,6 +13,8 @@ import '@shared/container'
 import { router } from './routes'
 
 import swaggerFile from '../../../swagger.json'
+
+dontenv.config({ path: `${__dirname}/.env` })
 
 const app = express()
 app.use(express.json())

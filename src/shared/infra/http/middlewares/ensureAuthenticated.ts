@@ -3,6 +3,7 @@ import { verify } from 'jsonwebtoken'
 
 import { AppError } from '@shared/errors/AppError'
 import { UsersRepository } from '@modules/accounts/infra/typeorm/repositories/UsersRepository'
+import { authConfig } from '@config/auth'
 
 interface IPayload {
   sub: string
@@ -22,10 +23,7 @@ export async function ensureAuthenticated(
   const [, token] = authHeader.split(' ')
 
   try {
-    const { sub: user_id } = verify(
-      token,
-      '01a1a1c10ccdc7a08224abc6a6aa3c89bfc0b5d2'
-    ) as IPayload
+    const { sub: user_id } = verify(token, authConfig.jwt.publickey) as IPayload
 
     const usersRepository = new UsersRepository()
     const user = usersRepository.findById(user_id)
