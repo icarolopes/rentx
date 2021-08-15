@@ -1,3 +1,4 @@
+import { v4 as uuidV4 } from 'uuid'
 export class Car {
   id: string
   name: string
@@ -9,4 +10,12 @@ export class Car {
   brand: string
   category_id: string
   create_at: Date
+
+  constructor() {
+    if (!this.id) {
+      this.id = uuidV4()
+      this.available = true
+      this.create_at = new Date()
+    }
+  }
 }
