@@ -2,17 +2,19 @@ import express, { NextFunction, Request, Response } from 'express'
 import swaggerUI from 'swagger-ui-express'
 import * as dontenv from 'dotenv'
 
+import createConnection from '@shared/infra/typeorm'
+
 import 'express-async-errors'
 
 import { AppError } from '@shared/errors/AppError'
-
-import '@shared/infra/typeorm'
 
 import '@shared/container'
 
 import { router } from './routes'
 
 import swaggerFile from '../../../swagger.json'
+
+createConnection()
 
 dontenv.config({ path: `${__dirname}/.env` })
 
