@@ -22,7 +22,7 @@ export class Car {
   @Column()
   daily_rate: number
 
-  @Column('character varying', { default: () => true })
+  @Column()
   available: boolean
 
   @Column()
@@ -47,6 +47,7 @@ export class Car {
   constructor() {
     if (!this.id) {
       this.id = uuidV4()
+      this.available = true
     }
   }
 }
