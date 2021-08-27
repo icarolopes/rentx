@@ -1,5 +1,6 @@
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
+import { inject, injectable } from 'tsyringe'
 
 import { AppError } from '@shared/errors/AppError'
 import { Rental } from '../infra/typeorm/entities/Rental'
@@ -12,10 +13,13 @@ interface IRequest {
   car_id: string
   expected_return_date: Date
 }
-
+@injectable()
 export class CreateRentalUseCase {
   constructor(
+    @inject('RentalsRepository')
     private rentalsRepository: IRentalsRepository,
+
+    @inject('DayjsDateProvider')
     private dateProvider: IDateProvider
   ) {}
 
