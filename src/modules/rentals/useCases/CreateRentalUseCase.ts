@@ -6,6 +6,7 @@ import { AppError } from '@shared/errors/AppError'
 import { Rental } from '../infra/typeorm/entities/Rental'
 import { IRentalsRepository } from '../repositories/IRentalsRepository'
 import { IDateProvider } from '@shared/container/providers/dateProvider/IDateProvider'
+import { ICarsRepository } from '@modules/cars/repositories/ICarsRepository'
 
 dayjs.extend(utc)
 interface IRequest {
@@ -20,7 +21,10 @@ export class CreateRentalUseCase {
     private rentalsRepository: IRentalsRepository,
 
     @inject('DayjsDateProvider')
-    private dateProvider: IDateProvider
+    private dateProvider: IDateProvider,
+
+    @inject('CarsRepository')
+    private carsRepository: ICarsRepository
   ) {}
 
   async execute({
@@ -59,6 +63,8 @@ export class CreateRentalUseCase {
       car_id,
       expected_return_date
     })
+
+    await this.carsRepository.updateAvailable(car_id, false)
 
     return rental
   }
