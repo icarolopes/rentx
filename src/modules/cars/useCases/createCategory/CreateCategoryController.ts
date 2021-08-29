@@ -8,8 +8,8 @@ export class CreateCategoryController {
 
     const createCategoryUseCase = container.resolve(CreateCategoryUseCase)
 
-    await createCategoryUseCase.execute({ name, description })
+    const category = await createCategoryUseCase.execute({ name, description })
 
-    return response.status(201).send()
+    return response.status(201).json(category)
   }
 }
